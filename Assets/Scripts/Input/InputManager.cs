@@ -38,7 +38,7 @@ public class InputManager : IInputManager {
 
     private bool PollFiring ()  {
         #if UNITY_EDITOR
-            return Input.GetMouseButtonDown(0);
+            return Input.GetMouseButton(0);
         #else
             return Input.touchCount > 0;
         #endif
