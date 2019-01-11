@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class Marching : MonoBehaviour
 {
-    [Range(0f, 5f)]
-    public float moveSpeed = 1f;
-    public Vector3 dir;
+    [Range(0f, 1f)]
+    public float animatedSpeedOffset = 0f;
+    public float animatedHeightOffset = 0f;
+    public float MAX_SPEED = 3f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        dir = transform.forward;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        transform.position += dir * (moveSpeed * Time.deltaTime);
+    public float MoveSpeed {
+        get { return MAX_SPEED * animatedSpeedOffset; }
     }
 }
