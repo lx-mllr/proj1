@@ -5,20 +5,20 @@ using UnityEngine;
 public class EnemyView : MonoBehaviour
 {
 
-    private Marching marching;
-    private Vector3 _dir;
+    private Marching _marching;
+    private Transform _target;
     // Start is called before the first frame update
     void Start()
     {
-        marching = GetComponentInChildren<Marching>();
-        _dir = transform.forward;
+        _marching = GetComponentInChildren<Marching>();
+        // _target;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (marching) {
-            transform.position += _dir * (marching.MoveSpeed * Time.deltaTime);
+        if (_marching) {
+            transform.position += transform.forward * (_marching.MoveSpeed * Time.deltaTime);
         }
     }
 }

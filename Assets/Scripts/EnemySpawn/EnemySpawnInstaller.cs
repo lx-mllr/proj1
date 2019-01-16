@@ -25,7 +25,7 @@ public class EnemySpawnInstaller : MonoInstaller
             sum += spawnDescriptors[i].percent;
         }
         int target = (int)(sum * UnityEngine.Random.value);
-        Debug.Log(target);
+        
         sum = 0;
         for (i = 0; i < spawnDescriptors.Count; i++) {
             sum += spawnDescriptors[i].percent;
