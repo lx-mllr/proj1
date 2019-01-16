@@ -5,8 +5,7 @@ using Zenject;
 
 public class RotateToTouch : MonoBehaviour
 {
-    [Inject]
-    IInputManager _inputManager;
+    [Inject] readonly IInputManager _inputManager;
 
     Quaternion _targetRotation;
 

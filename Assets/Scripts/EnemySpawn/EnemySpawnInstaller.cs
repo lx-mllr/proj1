@@ -5,16 +5,17 @@ using Zenject;
 
 public class EnemySpawnInstaller : MonoInstaller
 {
+    public EnemyView enemyPrefab;
     public List<EnemySpawnDescriptor> spawnDescriptors;
 
     public override void InstallBindings()
     {
-        SignalBusInstaller.Install(Container);
-
         Container.DeclareSignal<RebindEnemySpawnSettings>().OptionalSubscriber();
 
         Container.BindSignal<RebindEnemySpawnSettings>().ToMethod(RebindSettings);
         RebindSettings();
+
+        Container.BindFactory<EnemyView, EnemyView.Factory>().FromComponentInNewPrefab(enemyPrefab);
     }
 
     private void RebindSettings() {

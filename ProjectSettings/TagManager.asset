@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -15,14 +16,14 @@ TagManager:
   - 
   - PostProcessing
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - EQ1
+  - EQ2
+  - EQ3
+  - EQ4
+  - EQ5
+  - EQ6
+  - EQ7
+  - EQ8
   - 
   - 
   - 

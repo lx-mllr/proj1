@@ -5,6 +5,6 @@ public class InputInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        Container.BindInterfacesAndSelfTo<InputManager>().AsSingle();
+        Container.BindInterfacesAndSelfTo<ScreenTapInputManager>().AsSingle().NonLazy();
     }
 }

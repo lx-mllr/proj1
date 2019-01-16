@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class InputManager : IInputManager {
+public class ScreenTapInputManager : IInputManager {
     
     private Vector3 _3dPos;
     public Vector3 Position3D { get {return _3dPos;} }
@@ -12,7 +12,7 @@ public class InputManager : IInputManager {
     private Camera _cam;
     private Vector3 _centerScreen;
 
-    public InputManager () {
+    public ScreenTapInputManager () {
     }
 
     public void Initialize() {
@@ -20,7 +20,7 @@ public class InputManager : IInputManager {
         _centerScreen = new Vector3(_cam.pixelWidth / 2f, _cam.pixelHeight / 2f, 0f);
 
         _firing = false;
-        _3dPos = Vector3.zero;
+        _3dPos = Vector3.forward;
     }
 
     public void Tick () {
