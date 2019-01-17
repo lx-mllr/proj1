@@ -34,7 +34,7 @@ public class GamePlayManager : ITickable, IInitializable {
 
     public void Tick () {
         // per second
-        int sRate = 1 / _settings.EnemySpawnRate;
+        float sRate = 1 / _settings.EnemySpawnRate;
         _lastSpawn += Time.deltaTime;
 
         if (_lastSpawn > sRate) {

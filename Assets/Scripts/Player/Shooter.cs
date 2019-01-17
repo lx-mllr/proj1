@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(LineRenderer))]
 public class Shooter : MonoBehaviour
 {
+    LineRenderer _lineRenderer;
     Vector3 _dir;
 
     [Inject] readonly IInputManager _inputMan;
@@ -21,17 +23,19 @@ public class Shooter : MonoBehaviour
     void Start()
     {
         _dir = Vector3.forward;
+        _lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (_inputMan.Firing) {
-            Vector3 direction = _dir + new Vector3((Random.value-.5f)*variance, (Random.value-.5f)*variance, 0);
+            _lineRenderer.enabled = true;
+            Vector3 xyOffset = new Vector3((Random.value-.5f)*variance, (Random.value-.5f)*variance, 0);
+            Vector3 target = (_dir + xyOffset) * shootStr;
+            target.y = 0;
+            Vector3 direction = target - transform.position;
             direction = transform.rotation * direction;
-
-            direction.Normalize();
-            direction *= shootStr;
             
             int layer = LayerUtil.GetLayerFromPos(transform.position);
             Vector3 particlePos = transform.position + direction;
@@ -52,8 +56,12 @@ public class Shooter : MonoBehaviour
                 particleSystem.Play();
             }
             particleSystem.transform.position = particlePos;
+
+            Vector3[] positions = { transform.position, particlePos };
+            _lineRenderer.SetPositions(positions);
         }
         else {
+            _lineRenderer.enabled = false;
             if(particleSystem.isPlaying) {
                 particleSystem.Stop();
             }

@@ -9,7 +9,7 @@ public class ScptGameplayInstaller : ScriptableObjectInstaller<ScptGameplayInsta
     [Serializable]
     public struct Settings {
         public int RespawnSettingsRebindThreshold;
-        public int EnemySpawnRate;
+        public float EnemySpawnRate;
     }
 
     public override void InstallBindings()

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     RespawnSettingsRebindThreshold: 10
-    EnemySpawnRate: 1
+    EnemySpawnRate: 2
