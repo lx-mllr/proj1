@@ -31,7 +31,7 @@ public class EnemyView : MonoBehaviour
         transform.position = startPos;
         transform.LookAt(Vector3.zero);
 
-        gameObject.layer = LayerUtil.GetLayerFromPos(transform.position);
+        //gameObject.layer = LayerUtil.GetLayerFromPos(transform.position);
     }
 
     // Update is called once per frame

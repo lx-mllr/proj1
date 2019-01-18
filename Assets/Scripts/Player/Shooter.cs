@@ -17,6 +17,9 @@ public class Shooter : MonoBehaviour
     [Range(10, 30)]
     public float shootStr = 20f;
 
+    [Range(1, 10)]
+    public int shotsPerFrame = 1;
+
     public ParticleSystem particleSystem;
 
     // Start is called before the first frame update
@@ -31,40 +34,38 @@ public class Shooter : MonoBehaviour
     {
         if (_inputMan.Firing) {
             _lineRenderer.enabled = true;
-            Vector3 xyOffset = new Vector3((Random.value-.5f)*variance, (Random.value-.5f)*variance, 0);
-            Vector3 target = (_dir + xyOffset) * shootStr;
-            target.y = 0;
-            Vector3 direction = target - transform.position;
-            direction = transform.rotation * direction;
-            
-            int layer = LayerUtil.GetLayerFromPos(transform.position);
-            Vector3 particlePos = transform.position + direction;
-            Debug.Log("Shooting into quad: " + LayerMask.LayerToName(layer));
+            List<Vector3> positions = new List<Vector3>();
 
-            Debug.DrawRay(transform.position, direction, Color.white, Time.deltaTime);
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, shootStr, layer)) {
-                if (hit.collider) {
-                    particlePos = hit.point;
-                    EnemyView enemy = hit.collider.GetComponentInParent<EnemyView>();
-                    if (enemy) {
-                        enemy.TakeDamage();
+            for (var i = 0; i < shotsPerFrame; i++) {
+                Vector3 xyOffset = new Vector3((Random.value-.5f)*2*variance, (Random.value-.5f)*2*variance, 0);
+                Vector3 target = (_dir + xyOffset) * shootStr;
+                //target.y = 0;
+                Vector3 direction = target - transform.position;
+                direction = transform.rotation * direction;
+                
+                //int layer = LayerUtil.GetLayerFromPos(transform.position);
+                Vector3 particlePos = transform.position + direction;
+
+                Debug.DrawRay(transform.position, direction, Color.white, Time.deltaTime);
+                if (Physics.Raycast(transform.position, direction, out RaycastHit hit, shootStr)) {
+                    if (hit.collider) {
+                        particlePos = hit.point;
+                        Instantiate(particleSystem, particlePos, Quaternion.identity, hit.collider.transform);
+
+                        EnemyView enemy = hit.collider.GetComponent<EnemyView>();
+                        if (enemy) {
+                            enemy.TakeDamage();
+                        }
                     }
                 }
+                positions.Add(transform.position);
+                positions.Add(particlePos);
             }
 
-            if (particleSystem.isStopped) {
-                particleSystem.Play();
-            }
-            particleSystem.transform.position = particlePos;
-
-            Vector3[] positions = { transform.position, particlePos };
-            _lineRenderer.SetPositions(positions);
+            _lineRenderer.SetPositions(positions.ToArray());
         }
         else {
             _lineRenderer.enabled = false;
-            if(particleSystem.isPlaying) {
-                particleSystem.Stop();
-            }
         }
 
     }
