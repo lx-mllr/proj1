@@ -50,7 +50,7 @@ public class Shooter : MonoBehaviour
                 if (Physics.Raycast(transform.position, direction, out RaycastHit hit, shootStr)) {
                     if (hit.collider) {
                         particlePos = hit.point;
-                        Instantiate(particleSystem, particlePos, Quaternion.identity, hit.collider.transform);
+                        Instantiate(particleSystem, particlePos, particleSystem.transform.rotation, hit.collider.transform);
 
                         EnemyView enemy = hit.collider.GetComponent<EnemyView>();
                         if (enemy) {

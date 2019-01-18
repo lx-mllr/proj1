@@ -433,10 +433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16abda9a81322240b4b669ac5a0e5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variance: 0.2
+  variance: 0.06
   shootStr: 20
-  shotsPerFrame: 1
-  particleSystem: {fileID: 0}
+  shotsPerFrame: 3
+  particleSystem: {fileID: 8901030143027723171, guid: e2d1db37b45100043a14ac43e609e880,
+    type: 3}
 --- !u!120 &4124221994771509060
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -529,7 +530,7 @@ LineRenderer:
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
-    generateLightingData: 0
+    generateLightingData: 1
   m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!1 &8433658790685937656
