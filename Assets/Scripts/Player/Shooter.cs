@@ -43,16 +43,17 @@ public class Shooter : MonoBehaviour
                 Vector3 direction = target - transform.position;
                 direction = transform.rotation * direction;
                 
-                //int layer = LayerUtil.GetLayerFromPos(transform.position);
+                LayerMask layerMask = LayerUtil.GetLayerMaskFromPos(direction);
+                //Debug.Log("Shooter :: Layer " + layer);
                 Vector3 particlePos = transform.position + direction;
 
                 Debug.DrawRay(transform.position, direction, Color.white, Time.deltaTime);
-                if (Physics.Raycast(transform.position, direction, out RaycastHit hit, shootStr)) {
+                if (Physics.Raycast(transform.position, direction, out RaycastHit hit, shootStr, layerMask)) {
                     if (hit.collider) {
                         particlePos = hit.point;
-                        Instantiate(particleSystem, particlePos, particleSystem.transform.rotation, hit.collider.transform);
+                        Instantiate(particleSystem, particlePos, particleSystem.transform.rotation);
 
-                        EnemyView enemy = hit.collider.GetComponent<EnemyView>();
+                        EnemyView enemy = hit.collider.gameObject.GetComponent<EnemyView>();
                         if (enemy) {
                             enemy.TakeDamage();
                         }

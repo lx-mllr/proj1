@@ -10,6 +10,7 @@ public class EnemyView : MonoBehaviour
 
     private static float spawnOffset = 0f;
     
+    private Animator _animator;
     private Marching _marching;
     private float hp;
 
@@ -18,6 +19,7 @@ public class EnemyView : MonoBehaviour
     {
         hp = _settings.HP;
         _marching = GetComponentInChildren<Marching>();
+        _animator = GetComponentInChildren<Animator>();
         
         if (spawnOffset == 0f) {
             MeshCollider _ground = GameObject.FindWithTag("Ground").GetComponent<MeshCollider>();
@@ -31,7 +33,7 @@ public class EnemyView : MonoBehaviour
         transform.position = startPos;
         transform.LookAt(Vector3.zero);
 
-        //gameObject.layer = LayerUtil.GetLayerFromPos(transform.position);
+        gameObject.layer = LayerUtil.GetLayerFromPos(transform.position);
     }
 
     // Update is called once per frame
@@ -40,6 +42,15 @@ public class EnemyView : MonoBehaviour
         if (_marching) {
             transform.position += transform.forward * (_marching.MoveSpeed * Time.deltaTime);
         }
+    }
+
+    void OnTriggerEnter (Collider other) {
+        BaseView baseView = other.GetComponentInParent<BaseView>();
+        if (baseView) {
+            // there has to be a better way to do this..
+            _animator.SetBool("InAttackRange", true);
+        }
+
     }
 
     public void TakeDamage () {
