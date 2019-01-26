@@ -6,5 +6,6 @@ public class InputInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInterfacesAndSelfTo<ScreenTapInputManager>().AsSingle().NonLazy();
+        Container.BindSignal<StartGameSignal>().ToMethod<IInputManager>(s => s.Enable).FromResolve();
     }
 }

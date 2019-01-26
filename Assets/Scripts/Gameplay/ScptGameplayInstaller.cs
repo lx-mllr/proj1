@@ -19,8 +19,17 @@ public class ScptGameplayInstaller : ScriptableObjectInstaller<ScptGameplayInsta
         Container.BindInstance(settings);
 
         Container.DeclareSignal<AddScoreSignal>().OptionalSubscriber();
-        Container.BindInterfacesAndSelfTo<GamePlayManager>().AsSingle().NonLazy();
+        Container.DeclareSignal<StartGameSignal>().OptionalSubscriber();
 
+        Container.BindInterfacesAndSelfTo<GamePlayManager>().AsSingle().NonLazy();
         Container.BindSignal<AddScoreSignal>().ToMethod<GamePlayManager>(s => s.AddScore).FromResolve();
+        Container.BindSignal<StartGameSignal>().ToMethod<GamePlayManager>(s => s.Start).FromResolve();
     }
+}
+
+public struct AddScoreSignal {
+    public int val;
+}
+
+public struct StartGameSignal {
 }

@@ -10,6 +10,7 @@ public class Shooter : MonoBehaviour
     Vector3 _dir;
 
     [Inject] readonly IInputManager _inputMan;
+    [Inject] readonly GamePlayManager _gamePlayManager;
 
     [Range(0f, 0.25f)]
     public float variance;
