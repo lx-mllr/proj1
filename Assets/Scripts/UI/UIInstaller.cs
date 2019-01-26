@@ -10,6 +10,7 @@ public class UIInstaller : MonoInstaller
     [Serializable]
     public struct UISettings {
         public CanvasRenderer startScreen;
+        public CanvasRenderer gameScreen;
     }
 
     public override void InstallBindings()
@@ -21,6 +22,7 @@ public class UIInstaller : MonoInstaller
         Container.DeclareSignal<DestroyScreenSignal>().OptionalSubscriber();
 
         Container.BindInterfacesAndSelfTo<UIManager>().AsSingle().NonLazy();
+        Container.BindSignal<StartGameSignal>().ToMethod<UIManager>(x => x.StartGame).FromResolve();
         Container.BindSignal<CreateScreenSignal>().ToMethod<UIManager>(x => x.CreateScreen).FromResolve();
         Container.BindSignal<DestroyScreenSignal>().ToMethod<UIManager>(x => x.DestroyScreen).FromResolve();
     }

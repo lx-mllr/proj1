@@ -9,23 +9,25 @@ public class GamePlayManager : ITickable, IInitializable {
     [Inject] readonly SignalBus _signalBus;
     
     private int _score;
+    public int Score { get { return _score; } }
     private float _lastSpawn;
     private float _spawnRate;
     private bool _running;
+
 
     public void Initialize () {
         _running = false;
         Reset();
     }
 
-    public void Start () {
-        _running = true;
-    }
-
     public void Reset () {
         _score = 0;
         _lastSpawn = 0f;
         _spawnRate = 1 / _settings.EnemySpawnRate;
+    }
+
+    public void Start () {
+        _running = true;
     }
 
     public void AddScore (AddScoreSignal signal) {

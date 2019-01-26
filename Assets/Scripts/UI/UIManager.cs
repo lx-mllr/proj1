@@ -15,6 +15,12 @@ public class UIManager : IInitializable {
         });
     }
 
+    public void StartGame (StartGameSignal signal) {
+        CreateScreen(new CreateScreenSignal() {
+            toCreate = _settings.gameScreen
+        });
+    }
+
     public void CreateScreen (CreateScreenSignal signal) {
         if (_activeScreen) {
             DestroyScreen();
