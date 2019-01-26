@@ -8,6 +8,7 @@ public class ScptGameplayInstaller : ScriptableObjectInstaller<ScptGameplayInsta
     public Settings settings;
     [Serializable]
     public struct Settings {
+        public int BaseHealth;
         public int RespawnSettingsRebindThreshold;
         public float EnemySpawnRate;
     }

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 5
   score: 3
-  MoveSpeed: 0.5
+  MoveSpeed: 1
   AttackStr: 3

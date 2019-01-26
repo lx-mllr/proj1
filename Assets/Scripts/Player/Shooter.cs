@@ -21,8 +21,6 @@ public class Shooter : MonoBehaviour
     [Range(1, 10)]
     public int shotsPerFrame = 1;
 
-    public ParticleSystem particleSystem;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -50,11 +48,10 @@ public class Shooter : MonoBehaviour
                 if (Physics.Raycast(transform.position, direction, out RaycastHit hit, shootStr, layerMask)) {
                     if (hit.collider) {
                         rayEnd = hit.point;
-                        Instantiate(particleSystem, rayEnd, particleSystem.transform.rotation);
 
                         EnemyView enemy = hit.collider.gameObject.GetComponent<EnemyView>();
                         if (enemy) {
-                            enemy.ProcessHit();
+                            enemy.ProcessHit(hit);
                         }
                     }
                 }

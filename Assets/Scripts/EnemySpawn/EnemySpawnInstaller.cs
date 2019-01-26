@@ -47,3 +47,7 @@ public class EnemySpawnInstaller : MonoInstaller
 
 public struct RebindEnemySpawnSettings {
 }
+
+public struct AttackSignal {
+    public float damage;
+}

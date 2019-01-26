@@ -5,6 +5,8 @@ using Zenject;
 
 public class EnemyView : MonoBehaviour
 {
+    public List<ParticleSystem> onHitSystems;
+
     [Inject] readonly EnemySpawnSettings _settings;
     [Inject] readonly SignalBus _signalBus;
     
@@ -55,7 +57,12 @@ public class EnemyView : MonoBehaviour
 
     }
 
-    public void ProcessHit () {
+    public void ProcessHit (RaycastHit hit) {
+        
+        for (var i = 0; i < onHitSystems.length; i++) {
+            Instantiate(onHitSystems[i], rayEnd, particleSystem.transform.rotation);
+        }
+
         hp--;
         if (hp <= 0) {
             Destroy(gameObject);
@@ -63,6 +70,12 @@ public class EnemyView : MonoBehaviour
                 val = _settings.score
             });
         }
+    }
+
+    public void DispatchAttack () {
+        _signalBus.Fire(new AttackSignal () {
+                damage = _settings.AttackStr
+        });
     }
 
     public class Factory : PlaceholderFactory<EnemyView> {

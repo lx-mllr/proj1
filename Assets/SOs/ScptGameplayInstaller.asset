@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ScptGameplayInstaller
   m_EditorClassIdentifier: 
   settings:
-    RespawnSettingsRebindThreshold: 10
-    EnemySpawnRate: 0.5
+    BaseHealth: 100
+    RespawnSettingsRebindThreshold: 50
+    EnemySpawnRate: 1.25
