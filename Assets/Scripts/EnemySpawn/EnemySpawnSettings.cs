@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemySpawnSettings : ScriptableObject
 {
     public int HP;
+    public int score;
     public float MoveSpeed;
     public float AttackStr;
 }

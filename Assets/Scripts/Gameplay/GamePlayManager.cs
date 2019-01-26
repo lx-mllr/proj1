@@ -10,6 +10,7 @@ public class GamePlayManager : ITickable, IInitializable {
     
     private int _score;
     private float _lastSpawn;
+    private float _spawnRate;
 
     public void Initialize () {
         Reset();
@@ -18,6 +19,7 @@ public class GamePlayManager : ITickable, IInitializable {
     public void Reset () {
         _score = 0;
         _lastSpawn = 0f;
+        _spawnRate = 1 / _settings.EnemySpawnRate;
     }
 
     public void AddScore (AddScoreSignal signal) {
@@ -27,19 +29,18 @@ public class GamePlayManager : ITickable, IInitializable {
         int prevScoreMod = (_score - signal.val) / _settings.RespawnSettingsRebindThreshold;
 
         if (currScoreMod > prevScoreMod) {
-            Debug.Log("GPM :: REBIND");
+            Debug.Log("GPM :: REBIND @ " + _score);
             _signalBus.Fire<RebindEnemySpawnSettings>();
         }
     }
 
     public void Tick () {
-        // per second
-        float sRate = 1 / _settings.EnemySpawnRate;
         _lastSpawn += Time.deltaTime;
 
-        if (_lastSpawn > sRate) {
+        if (_lastSpawn > _spawnRate) {
             _enemyFactory.Create();
             _lastSpawn = 0f;
+            _spawnRate = Mathf.Lerp(1, _spawnRate, .9f);
         }
     }
 }

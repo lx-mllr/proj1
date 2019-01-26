@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Enemy-Easy
   m_EditorClassIdentifier: 
   HP: 1
-  MoveSpeed: 1
+  score: 1
+  MoveSpeed: 1.5
   AttackStr: 1

@@ -6,8 +6,9 @@ using Zenject;
 public class EnemyView : MonoBehaviour
 {
     [Inject] readonly EnemySpawnSettings _settings;
+    [Inject] readonly SignalBus _signalBus;
     
-
+    public static float spawnDistance = 0.6f;
     private static float spawnOffset = 0f;
     
     private Animator _animator;
@@ -23,7 +24,7 @@ public class EnemyView : MonoBehaviour
         
         if (spawnOffset == 0f) {
             MeshCollider _ground = GameObject.FindWithTag("Ground").GetComponent<MeshCollider>();
-            spawnOffset = (_ground.bounds.extents.magnitude * .7f);
+            spawnOffset = (_ground.bounds.extents.magnitude * spawnDistance);
         }
 
         float x = (Random.value * 2) - 1;
@@ -40,7 +41,8 @@ public class EnemyView : MonoBehaviour
     void Update()
     {
         if (_marching) {
-            transform.position += transform.forward * (_marching.MoveSpeed * Time.deltaTime);
+            float speed = _marching.MoveSpeed * _settings.MoveSpeed;
+            transform.position += transform.forward * (speed * Time.deltaTime);
         }
     }
 
@@ -53,10 +55,13 @@ public class EnemyView : MonoBehaviour
 
     }
 
-    public void TakeDamage () {
+    public void ProcessHit () {
         hp--;
         if (hp <= 0) {
             Destroy(gameObject);
+            _signalBus.Fire(new AddScoreSignal() {
+                val = _settings.score
+            });
         }
     }
 
