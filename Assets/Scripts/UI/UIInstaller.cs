@@ -23,6 +23,7 @@ public class UIInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<UIManager>().AsSingle().NonLazy();
         Container.BindSignal<StartGameSignal>().ToMethod<UIManager>(x => x.StartGame).FromResolve();
+        Container.BindSignal<EndGameSignal>().ToMethod<UIManager>(x => x.Reset).FromResolve();
         Container.BindSignal<CreateScreenSignal>().ToMethod<UIManager>(x => x.CreateScreen).FromResolve();
         Container.BindSignal<DestroyScreenSignal>().ToMethod<UIManager>(x => x.DestroyScreen).FromResolve();
     }

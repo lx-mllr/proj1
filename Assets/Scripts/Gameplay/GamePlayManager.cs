@@ -16,14 +16,16 @@ public class GamePlayManager : ITickable, IInitializable {
 
 
     public void Initialize () {
-        _running = false;
         Reset();
     }
 
     public void Reset () {
+        _running = false;
         _score = 0;
         _lastSpawn = 0f;
         _spawnRate = 1 / _settings.EnemySpawnRate;
+
+        
     }
 
     public void Start () {

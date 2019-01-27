@@ -51,16 +51,14 @@ public class EnemyView : MonoBehaviour
     void OnTriggerEnter (Collider other) {
         BaseView baseView = other.GetComponentInParent<BaseView>();
         if (baseView) {
-            // there has to be a better way to do this..
-            _animator.SetBool("InAttackRange", true);
+            _animator.SetBool("InAttackRange", true);            // there has to be a better way to do this..
         }
 
     }
 
     public void ProcessHit (RaycastHit hit) {
-        
-        for (var i = 0; i < onHitSystems.length; i++) {
-            Instantiate(onHitSystems[i], rayEnd, particleSystem.transform.rotation);
+        for (var i = 0; i < onHitSystems.Count; i++) {
+            Instantiate(onHitSystems[i], hit.point, onHitSystems[i].transform.rotation);
         }
 
         hp--;

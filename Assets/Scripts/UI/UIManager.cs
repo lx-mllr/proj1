@@ -10,6 +10,10 @@ public class UIManager : IInitializable {
     public CanvasRenderer activeScreen { get { return _activeScreen; } }
 
     public void Initialize () {
+        Reset();
+    }
+
+    public void Reset () {
         CreateScreen(new CreateScreenSignal() {
             toCreate = _settings.startScreen
         });
