@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Marching))]
 public class EnemyView : MonoBehaviour
 {
     public List<ParticleSystem> onHitSystems;
@@ -13,24 +15,28 @@ public class EnemyView : MonoBehaviour
     public static float spawnDistance = 0.6f;
     private static float spawnOffset = 0f;
     
-    private Animator _animator;
+    public Animator animator { get; private set; }
     private Marching _marching;
     private float hp;
+    private bool _idle;
+    private List<Collider> _trackedColliders;
 
     // Start is called before the first frame update
     void Start()
     {
-        hp = _settings.HP;
-        _marching = GetComponentInChildren<Marching>();
-        _animator = GetComponentInChildren<Animator>();
-        
         if (spawnOffset == 0f) {
             MeshCollider _ground = GameObject.FindWithTag("Ground").GetComponent<MeshCollider>();
             spawnOffset = (_ground.bounds.extents.magnitude * spawnDistance);
         }
+        
+        hp = _settings.HP;
+        _marching = GetComponentInChildren<Marching>();
+        animator = GetComponentInChildren<Animator>();
+        _idle = false;
+        _trackedColliders = new List<Collider>();
 
-        float x = (Random.value * 2) - 1;
-        float z = (Random.value * 2) - 1;
+        float x = (Random.value * 2f) - 1f;
+        float z = (Random.value * 2f) - 1f;
         Vector3 startPos = new Vector3(x, 0, z);
         startPos = startPos.normalized * spawnOffset;
         transform.position = startPos;
@@ -39,21 +45,44 @@ public class EnemyView : MonoBehaviour
         gameObject.layer = LayerUtil.GetLayerFromPos(transform.position);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (_marching) {
-            float speed = _marching.MoveSpeed * _settings.MoveSpeed;
-            transform.position += transform.forward * (speed * Time.deltaTime);
-        }
+    void LateUpdate () {
+        float speed = _marching.MoveSpeed * _settings.MoveSpeed;
+        transform.position += transform.forward * (speed * Time.deltaTime);
     }
 
     void OnTriggerEnter (Collider other) {
         BaseView baseView = other.GetComponentInParent<BaseView>();
+
         if (baseView) {
-            _animator.SetBool("InAttackRange", true);            // there has to be a better way to do this..
+            animator.SetBool("InAttackRange", true);            // there has to be a better way to do this..
+        }
+    }
+
+    void OnCollisionEnter (Collision collision) {
+        Collider oCollider = collision.collider;
+        EnemyView oEnemyView = oCollider.GetComponent<EnemyView>(); 
+
+        if (oEnemyView && _trackedColliders.IndexOf(oCollider) < 0) {
+            if (oEnemyView.animator.GetCurrentAnimatorStateInfo(0).fullPathHash  == animator.GetCurrentAnimatorStateInfo(0).fullPathHash) {
+                _trackedColliders.Add(oCollider);
+                
+                _idle = !(oEnemyView.animator.GetBool("Idle"));
+                animator.SetBool("Idle", _idle);
+            }
+        }
+    }
+
+    void OnCollisionExit (Collision collision) {
+        if (!_idle) { return; }
+
+        Collider other = collision.collider;
+        int index = _trackedColliders.IndexOf(other);
+        if (index >= 0) {
+            _trackedColliders.RemoveAt(index);
         }
 
+        _idle = _trackedColliders.Count == 0 ? false : true;
+        animator.SetBool("Idle", _idle);
     }
 
     public void ProcessHit (RaycastHit hit) {

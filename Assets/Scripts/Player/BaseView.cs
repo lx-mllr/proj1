@@ -29,7 +29,6 @@ public class BaseView : MonoBehaviour
 
     public void OnAttackSignal(AttackSignal signal) {
         HP -= signal.damage;
-        Debug.Log(signal.damage);
     }
 
     void OnDestroy () {

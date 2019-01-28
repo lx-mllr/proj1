@@ -8,7 +8,6 @@ public class StartButton : MonoBehaviour
     [Inject] readonly SignalBus _signalBus;
 
     public void FireStartGame () {
-        _signalBus.Fire<DestroyScreenSignal>();
         _signalBus.Fire<StartGameSignal>();
     }
 }

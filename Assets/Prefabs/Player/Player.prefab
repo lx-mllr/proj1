@@ -178,6 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1359242188725958725}
+  - component: {fileID: 1500891339}
   m_Layer: 0
   m_Name: top
   m_TagString: Untagged
@@ -202,6 +203,19 @@ Transform:
   m_Father: {fileID: 6228504279341792381}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1500891339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4292121789214174317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539cbe375b8d294469fbb3483f110b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationSpeed: 0.1
 --- !u!1 &4327365599720042186
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +302,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5765744990468280630}
-  - component: {fileID: 6614205515995789666}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -311,20 +324,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6614205515995789666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858666018406696002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 539cbe375b8d294469fbb3483f110b4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toRotate: {fileID: 1359242188725958725}
-  RotationSpeed: 0.1
 --- !u!1 &7420265054191251913
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8095263993483361679}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.73, y: 2.112, z: 2.366}
+  m_LocalPosition: {x: 0.73, y: 1.54, z: 2.366}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1359242188725958725}
@@ -436,8 +435,6 @@ MonoBehaviour:
   variance: 0.06
   shootStr: 20
   shotsPerFrame: 3
-  particleSystem: {fileID: 8901030143027723171, guid: e2d1db37b45100043a14ac43e609e880,
-    type: 3}
 --- !u!120 &4124221994771509060
 LineRenderer:
   m_ObjectHideFlags: 0
