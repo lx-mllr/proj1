@@ -10,9 +10,11 @@ public class EnemySpawnInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.DeclareSignal<RebindEnemySpawnSettings>().OptionalSubscriber();
+        Container.DeclareSignal<RebindEnemySpawnSettings>().OptionalSubscriber().RunAsync();
 
+        Container.BindInstance(this);
         Container.BindSignal<RebindEnemySpawnSettings>().ToMethod(RebindSettings);
+        Container.BindSignal<EndGameSignal>().ToMethod(DestroyAll);
         RebindSettings();
 
         Container.BindFactory<EnemyView, EnemyView.Factory>().FromComponentInNewPrefab(enemyPrefab);
@@ -36,6 +38,15 @@ public class EnemySpawnInstaller : MonoInstaller
         }
 
         Container.BindInstance(spawnDescriptors[i].settings).AsTransient();
+    }
+
+    private void DestroyAll () {
+        float delay = 0f;
+        EnemyView[] enemies = GetComponentsInChildren<EnemyView>(true);
+        foreach (EnemyView enemy in enemies) {
+            Destroy(enemy, delay);
+            delay += Time.deltaTime;
+        }
     }
 
     [Serializable]

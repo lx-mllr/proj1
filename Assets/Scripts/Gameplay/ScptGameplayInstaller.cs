@@ -19,10 +19,10 @@ public class ScptGameplayInstaller : ScriptableObjectInstaller<ScptGameplayInsta
 
         Container.BindInstance(settings);
 
-        Container.DeclareSignal<AddScoreSignal>().OptionalSubscriber();
+        Container.DeclareSignal<AddScoreSignal>().OptionalSubscriber().RunAsync();
         Container.DeclareSignal<StartGameSignal>().OptionalSubscriber();
         Container.DeclareSignal<EndGameSignal>().OptionalSubscriber();
-        Container.DeclareSignal<AttackSignal>().OptionalSubscriber();
+        Container.DeclareSignal<AttackSignal>().OptionalSubscriber().RunAsync();
 
         Container.BindInterfacesAndSelfTo<GamePlayManager>().AsSingle().NonLazy();
         Container.BindSignal<AddScoreSignal>().ToMethod<GamePlayManager>(s => s.AddScore).FromResolve();

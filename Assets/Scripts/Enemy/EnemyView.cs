@@ -106,5 +106,6 @@ public class EnemyView : MonoBehaviour
     }
 
     public class Factory : PlaceholderFactory<EnemyView> {
+        [Inject] public EnemySpawnInstaller spawnParent;
     }
 }

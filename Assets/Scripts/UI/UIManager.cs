@@ -4,38 +4,33 @@ using Zenject;
 public class UIManager : IInitializable {
 
     [Inject] readonly Canvas _canvas;
-    [Inject] readonly UIInstaller.UISettings _settings;
+    [Inject] readonly UISettings _settings;
 
-    private CanvasRenderer _activeScreen;
-    public CanvasRenderer activeScreen { get { return _activeScreen; } }
+    private GameObject _activeScreen;
 
     public void Initialize () {
         Reset();
     }
 
     public void Reset () {
-        CreateScreen(new CreateScreenSignal() {
-            toCreate = _settings.startScreen
-        });
+        CreateScreen(_settings.startScreen);
     }
 
     public void StartGame (StartGameSignal signal) {
-        CreateScreen(new CreateScreenSignal() {
-            toCreate = _settings.gameScreen
-        });
+        CreateScreen(_settings.gameScreen);
     }
 
-    public void CreateScreen (CreateScreenSignal signal) {
+    public void CreateScreen (CanvasRenderer screen) {
         if (_activeScreen) {
             DestroyScreen();
         }
 
-        _activeScreen = CanvasRenderer.Instantiate(signal.toCreate, _canvas.transform, false);
+        _activeScreen = Object.Instantiate(screen, _canvas.transform, false).gameObject;
     }
 
     public void DestroyScreen () {
         if (_activeScreen) {
-            GameObject.Destroy(_activeScreen.gameObject);
+            Object.DestroyImmediate(_activeScreen);
             _activeScreen = null;
         }
     }

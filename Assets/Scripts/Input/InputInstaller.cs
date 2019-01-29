@@ -7,5 +7,6 @@ public class InputInstaller : MonoInstaller
     {
         Container.BindInterfacesAndSelfTo<ScreenTapInputManager>().AsSingle().NonLazy();
         Container.BindSignal<StartGameSignal>().ToMethod<IInputManager>(s => s.Enable).FromResolve();
+        Container.BindSignal<EndGameSignal>().ToMethod<IInputManager>(s => s.Disable).FromResolve();
     }
 }

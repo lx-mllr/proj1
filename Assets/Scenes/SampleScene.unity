@@ -309,9 +309,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1219756600}
-  settings:
-    startScreen: {fileID: 48, guid: c63bb5332da68b1429b6fb7d23c9bdcc, type: 3}
-    gameScreen: {fileID: 47, guid: fce8ecddf22678949985d5094f7a113b, type: 3}
+  startScreen: {fileID: 48, guid: c63bb5332da68b1429b6fb7d23c9bdcc, type: 3}
+  gameScreen: {fileID: 47, guid: fce8ecddf22678949985d5094f7a113b, type: 3}
 --- !u!4 &615454468
 Transform:
   m_ObjectHideFlags: 0

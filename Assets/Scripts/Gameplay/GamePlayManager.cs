@@ -24,8 +24,6 @@ public class GamePlayManager : ITickable, IInitializable {
         _score = 0;
         _lastSpawn = 0f;
         _spawnRate = 1 / _settings.EnemySpawnRate;
-
-        
     }
 
     public void Start () {
@@ -51,7 +49,8 @@ public class GamePlayManager : ITickable, IInitializable {
         _lastSpawn += Time.deltaTime;
 
         if (_lastSpawn > _spawnRate) {
-            _enemyFactory.Create();
+            EnemyView e = _enemyFactory.Create();
+            e.transform.parent = _enemyFactory.spawnParent.transform;
             _lastSpawn = 0f;
             _spawnRate = Mathf.Lerp(1, _spawnRate, .9f);
         }

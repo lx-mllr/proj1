@@ -20,6 +20,10 @@ public class ScreenTapInputManager : IInputManager {
         _enabled = true;
     }
 
+    public void Disable () {
+        _enabled = false;
+    }
+
     public void Initialize() {
         _enabled = false;
         _cam = Camera.main;
