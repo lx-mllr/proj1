@@ -52,7 +52,6 @@ public class GamePlayManager : ITickable, IInitializable {
             EnemyView e = _enemyFactory.Create();
             e.transform.parent = _enemyFactory.spawnParent.transform;
             _lastSpawn = 0f;
-            _spawnRate = Mathf.Lerp(1, _spawnRate, .9f);
         }
     }
 }
