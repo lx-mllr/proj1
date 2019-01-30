@@ -43,8 +43,9 @@ public class EnemySpawnInstaller : MonoInstaller
     private void DestroyAll () {
         float delay = 0f;
         EnemyView[] enemies = GetComponentsInChildren<EnemyView>(true);
+        Debug.Log("ESI::Destroy - enemy count: " + enemies.Length);
         foreach (EnemyView enemy in enemies) {
-            Destroy(enemy, delay);
+            Destroy(enemy.gameObject, delay);
             delay += Time.deltaTime;
         }
     }

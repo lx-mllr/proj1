@@ -28,6 +28,8 @@ public class ScptGameplayInstaller : ScriptableObjectInstaller<ScptGameplayInsta
         Container.BindSignal<AddScoreSignal>().ToMethod<GamePlayManager>(s => s.AddScore).FromResolve();
         Container.BindSignal<StartGameSignal>().ToMethod<GamePlayManager>(s => s.Start).FromResolve();
         Container.BindSignal<EndGameSignal>().ToMethod<GamePlayManager>(s => s.Reset).FromResolve();
+
+        Container.BindSignal<StartGameSignal>().ToMethod<IHeroMono>(s => s.Reset).FromResolve();
     }
 }
 

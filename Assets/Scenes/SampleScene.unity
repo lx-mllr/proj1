@@ -309,8 +309,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1219756600}
-  startScreen: {fileID: 48, guid: c63bb5332da68b1429b6fb7d23c9bdcc, type: 3}
-  gameScreen: {fileID: 47, guid: fce8ecddf22678949985d5094f7a113b, type: 3}
+  settings:
+    startScreen: {fileID: 48, guid: c63bb5332da68b1429b6fb7d23c9bdcc, type: 3}
+    gameScreen: {fileID: 47, guid: fce8ecddf22678949985d5094f7a113b, type: 3}
 --- !u!4 &615454468
 Transform:
   m_ObjectHideFlags: 0
@@ -391,6 +392,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &994063380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5679395615512831212, guid: e511bbe0e3df7154badb549a48ab85fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 5679395616039030302}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &994063381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994063380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 994063382}
+  _identifier: 
+  _useSceneContext: 1
+  _context: {fileID: 0}
+  _bindType: 2
+--- !u!114 &994063382 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5679395616039030304, guid: e511bbe0e3df7154badb549a48ab85fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 5679395616039030302}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994063380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7f794272b62254c933173fb8d25431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1219756597
 GameObject:
   m_ObjectHideFlags: 0

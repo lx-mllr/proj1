@@ -5,17 +5,11 @@ using System;
 public class UIInstaller : MonoInstaller
 {
     public Canvas canvas;
-    public CanvasRenderer startScreen;
-    public CanvasRenderer gameScreen;
+    public UISettings settings;
 
     public override void InstallBindings()
     {
         Container.BindInstance(canvas);
-        
-        UISettings settings = new UISettings() {
-            startScreen = startScreen,
-            gameScreen = gameScreen
-        };
         Container.BindInstance(settings);
 
         Container.DeclareSignal<DestroyScreenSignal>().OptionalSubscriber().RunAsync();
@@ -27,7 +21,8 @@ public class UIInstaller : MonoInstaller
     }
 }
 
-public class UISettings {
+[Serializable]
+public struct UISettings {
     public CanvasRenderer startScreen;
     public CanvasRenderer gameScreen;
 }

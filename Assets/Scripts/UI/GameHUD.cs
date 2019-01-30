@@ -26,6 +26,6 @@ public class GameHUD : MonoBehaviour
     }
 
    void OnDestroy () {
-       _signalBus.Unsubscribe<AddScoreSignal>(UpdateScore);
+       _signalBus.TryUnsubscribe<AddScoreSignal>(UpdateScore);
    }
 }

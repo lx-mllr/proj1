@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class BaseView : MonoBehaviour
+public class BaseView : MonoBehaviour, IHeroMono
 {
     [Inject] readonly ScptGameplayInstaller.Settings _settings;
     [Inject] readonly SignalBus _signalBus;
@@ -13,6 +13,11 @@ public class BaseView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enabled = false;
+    }
+
+    public void Reset () {
+        enabled = true;
         HP = _settings.BaseHealth;
         _signalBus.Subscribe<AttackSignal>(OnAttackSignal);
     }
@@ -23,15 +28,17 @@ public class BaseView : MonoBehaviour
         // update ui
 
         if (HP <= 0) {
-            _signalBus.Fire<EndGameSignal>();
+            TriggerEndGame();
         }
+    }
+
+    public void TriggerEndGame () {
+        enabled = false;
+        _signalBus.Fire<EndGameSignal>();
+        _signalBus.Unsubscribe<AttackSignal>(OnAttackSignal);
     }
 
     public void OnAttackSignal(AttackSignal signal) {
         HP -= signal.damage;
-    }
-
-    void OnDestroy () {
-        _signalBus.Unsubscribe<AttackSignal>(OnAttackSignal);
     }
 }
