@@ -60,8 +60,8 @@
                 input.uv *= _NumDivisions;
                 input.uv = frac(input.uv);
 
-                float y = !step(1 - _GapthThickness, input.uv.x);
-                fixed4 col = fixed4(_Color.rgb, y);
+                float a = !step(1 - _GapthThickness, input.uv.x);
+                fixed4 col = fixed4(_Color.rgb, a);
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
