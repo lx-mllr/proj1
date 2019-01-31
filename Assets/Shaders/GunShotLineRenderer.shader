@@ -4,7 +4,9 @@
     {
         [HDR]
         _Color ("Color", Color) = (0,0,0,1)
-        _Pct ("Percent", Range (0, 1)) = 0.5
+        _NumDivisions ("NumDivisions", Range(1,20)) = 4
+        _GapthThickness ("GapThickness", Range(0.1, 0.6)) = 0.1
+        _ScrollSpeed ("ScrollSpeed", Range(0, 10)) = 4
 
     }
     SubShader
@@ -37,7 +39,9 @@
             };
             
             fixed4 _Color;
-            float _Pct;
+            float _GapthThickness;
+            float _ScrollSpeed;
+            uint _NumDivisions;
 
             v2f vert (appdata v)
             {
@@ -48,15 +52,17 @@
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag (v2f input) : SV_Target
             {
-                // remap 0-1
-                float ratio = (_SinTime.z + 1) / 2;
-                float remap = ratio * .5 + .2;
+                float time = _Time.y * _ScrollSpeed;
 
-                float y = step(remap, i.uv.x);
-                fixed3 mul = fixed3(y,y,y) * _Color.rgb;
-                fixed4 col = fixed4(mul, y);
+                input.uv -= time;
+                input.uv *= _NumDivisions;
+                input.uv = frac(input.uv);
+
+                float y = !step(1 - _GapthThickness, input.uv.x);
+                fixed4 col = fixed4(_Color.rgb, y);
+
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
