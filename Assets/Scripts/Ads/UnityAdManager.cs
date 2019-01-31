@@ -5,8 +5,8 @@ using System;
 
 public class UnityAdManager : IAdManager {
 
-    public static const string VIDEO_PLACEMENT = "video";
-    public static const string REWARD_PLACEMENT = "rewardedVideo";
+    public const string VIDEO_PLACEMENT = "video";
+    public const string REWARD_PLACEMENT = "rewardedVideo";
 
     private string _gameId
         #if UNITY_ANDROID
@@ -54,7 +54,7 @@ public class UnityAdManager : IAdManager {
                 break;
             case UnityEngine.Monetization.ShowResult.Failed:
             case UnityEngine.Monetization.ShowResult.Skipped:
-                Debug.Log("UnityAdMan - Ad Finished: " + result);
+                Debug.Log("UnityAdMan - Ad End: " + result);
                 break;
         }
     }
