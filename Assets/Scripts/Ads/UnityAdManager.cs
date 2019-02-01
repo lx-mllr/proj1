@@ -22,7 +22,6 @@ public class UnityAdManager : IAdManager {
     }
     
     public void OnStartAd (PlayAdSignal signal) {
-        Debug.Log("UAdMan::OnStartAd");
         _callback = signal.callback;
         PlayAd(signal.placement);
     }
