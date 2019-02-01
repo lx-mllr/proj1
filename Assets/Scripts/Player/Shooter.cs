@@ -51,7 +51,6 @@ public class Shooter : MonoBehaviour
                         rayEnd = hit.point;
 
                         for (int j = 0; j < onHitSystems.Count; j++) {
-                            
                             Instantiate(onHitSystems[j], rayEnd, onHitSystems[j].transform.rotation, transform.root);
                         }
 
