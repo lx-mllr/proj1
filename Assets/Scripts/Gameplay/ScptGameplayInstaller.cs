@@ -30,6 +30,14 @@ public class ScptGameplayInstaller : ScriptableObjectInstaller<ScptGameplayInsta
         Container.BindSignal<EndGameSignal>().ToMethod<GamePlayManager>(s => s.Reset).FromResolve();
 
         Container.BindSignal<StartGameSignal>().ToMethod<IHeroMono>(s => s.Reset).FromResolve();
+
+        InstallPersistableSystems();
+    }
+
+
+    public void InstallPersistableSystems () {
+        Container.Bind<SaveManager>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<User>().AsSingle().NonLazy();
     }
 }
 

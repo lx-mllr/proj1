@@ -5,9 +5,6 @@ using System;
 
 public class UnityAdManager : IAdManager {
 
-    public const string VIDEO_PLACEMENT = "video";
-    public const string REWARD_PLACEMENT = "rewardedVideo";
-
     private string _gameId
         #if UNITY_ANDROID
             = "3026045";
@@ -25,6 +22,7 @@ public class UnityAdManager : IAdManager {
     }
     
     public void OnStartAd (PlayAdSignal signal) {
+        Debug.Log("UAdMan::OnStartAd");
         _callback = signal.callback;
         PlayAd(signal.placement);
     }

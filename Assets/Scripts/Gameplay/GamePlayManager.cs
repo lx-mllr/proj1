@@ -6,6 +6,7 @@ public class GamePlayManager : ITickable, IInitializable {
     
     [Inject] readonly ScptGameplayInstaller.Settings _settings;
     [Inject] readonly EnemyView.Factory _enemyFactory;
+    [Inject] readonly User _user;
     [Inject] readonly SignalBus _signalBus;
     
     private int _score;
@@ -20,6 +21,8 @@ public class GamePlayManager : ITickable, IInitializable {
     }
 
     public void Reset () {
+        _user.SaveState();
+        
         _running = false;
         _score = 0;
         _lastSpawn = 0f;
@@ -28,6 +31,7 @@ public class GamePlayManager : ITickable, IInitializable {
 
     public void Start () {
         _running = true;
+        _user.IncrementPlays();
     }
 
     public void AddScore (AddScoreSignal signal) {
