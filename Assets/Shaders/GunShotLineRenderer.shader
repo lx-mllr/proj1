@@ -2,10 +2,9 @@
 {
     Properties
     {
-        [HDR]
-        _Color ("Color", Color) = (0,0,0,1)
+        _Texture ("Texture", 2D) = "defaulttexture" {}
         _NumDivisions ("NumDivisions", Range(1,20)) = 4
-        _GapthThickness ("GapThickness", Range(0.1, 0.6)) = 0.1
+        _GapThickness ("GapThickness", Range(0.1, 0.6)) = 0.1
         _ScrollSpeed ("ScrollSpeed", Range(0, 10)) = 4
 
     }
@@ -38,8 +37,10 @@
                 float4 vertex : SV_POSITION;
             };
             
-            fixed4 _Color;
-            float _GapthThickness;
+            Texture2D _Texture;
+            SamplerState point_repeat_sampler;
+            // float4 _Texture_ST;
+            float _GapThickness;
             float _ScrollSpeed;
             uint _NumDivisions;
 
@@ -60,8 +61,10 @@
                 input.uv *= _NumDivisions;
                 input.uv = frac(input.uv);
 
-                float a = !step(1 - _GapthThickness, input.uv.x);
-                fixed4 col = fixed4(_Color.rgb, a);
+                float a = !step(1 - _GapThickness, input.uv.x);
+                float2 remapedUV = smoothstep(0, 1 - _GapThickness, input.uv);
+                fixed4 tex = _Texture.Sample(point_repeat_sampler, remapedUV);
+                fixed4 col = fixed4(tex.rgb, a);
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
