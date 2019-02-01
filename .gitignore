@@ -5,4 +5,3 @@
 .gradle/
 *.csproj 
 [Bb]uilds/ 
-*.sln
