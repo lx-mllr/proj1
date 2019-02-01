@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6301172871866996423}
   - component: {fileID: 2203247720244154278}
   - component: {fileID: 1223297534014826902}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 7135222438448825986}
   - component: {fileID: 4389655816581048748}
   - component: {fileID: 8754775548766563265}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1359242188725958725}
   - component: {fileID: 1500891339}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 3856212738449820591}
   - component: {fileID: 2764423207455454973}
   - component: {fileID: 3207584081475958966}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5765744990468280630}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6228504279341792381}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Geom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1808364536841521085}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,8 @@ GameObject:
   - component: {fileID: 1805438117079833083}
   - component: {fileID: 8095263993483361680}
   - component: {fileID: 4124221994771509060}
-  m_Layer: 0
+  - component: {fileID: 2101507614}
+  m_Layer: 9
   m_Name: BulletOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,6 +436,8 @@ MonoBehaviour:
   variance: 0.06
   shootStr: 20
   shotsPerFrame: 3
+  onHitSystems:
+  - {fileID: 8901030143027723171, guid: e2d1db37b45100043a14ac43e609e880, type: 3}
 --- !u!120 &4124221994771509060
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -530,6 +533,54 @@ LineRenderer:
     generateLightingData: 1
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &2101507614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8095263993483361679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19481a315a4f04c1698999553ff2b425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    serializedVersion: 2
+    key0: {r: 0.18867922, g: 0.16642931, b: 0.16642931, a: 1}
+    key1: {r: 0.5283019, g: 0.23175506, b: 0.23175506, a: 1}
+    key2: {r: 1, g: 0, b: 0, a: 0}
+    key3: {r: 1, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 40959
+    ctime1: 57343
+    ctime2: 65535
+    ctime3: 65535
+    ctime4: 65535
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  wrapMode: 1
+  filterMode: 1
+  anisoLevel: 1
+  resolution: 16
+  propertyName: _Texture
+  useSharedMaterial: 0
+  globalName: 
 --- !u!1 &8433658790685937656
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,7 +593,7 @@ GameObject:
   - component: {fileID: 3310037474802403201}
   - component: {fileID: 3206871286637443648}
   - component: {fileID: 1819002367353328042}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

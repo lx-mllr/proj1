@@ -19,6 +19,8 @@ public class Shooter : MonoBehaviour
 
     [Range(1, 10)]
     public int shotsPerFrame = 1;
+    
+    public List<ParticleSystem> onHitSystems;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,11 @@ public class Shooter : MonoBehaviour
                 if (Physics.Raycast(transform.position, direction, out RaycastHit hit, shootStr, layerMask)) {
                     if (hit.collider) {
                         rayEnd = hit.point;
+
+                        for (int j = 0; j < onHitSystems.Count; j++) {
+                            
+                            Instantiate(onHitSystems[j], rayEnd, onHitSystems[j].transform.rotation, transform.root);
+                        }
 
                         EnemyView enemy = hit.collider.gameObject.GetComponent<EnemyView>();
                         if (enemy) {

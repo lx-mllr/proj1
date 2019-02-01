@@ -86,13 +86,15 @@ public class EnemyView : MonoBehaviour
     }
 
     public void ProcessHit (RaycastHit hit) {
-        for (var i = 0; i < onHitSystems.Count; i++) {
+        float maxDelay = 0;
+        for (int i = 0; i < onHitSystems.Count; i++) {
             Instantiate(onHitSystems[i], hit.point, onHitSystems[i].transform.rotation);
+            maxDelay = Mathf.Max(onHitSystems[i].main.duration, maxDelay);
         }
 
         hp--;
         if (hp <= 0) {
-            Destroy(gameObject);
+            Destroy(gameObject, maxDelay);
             _signalBus.Fire(new AddScoreSignal() {
                 val = _settings.score
             });
