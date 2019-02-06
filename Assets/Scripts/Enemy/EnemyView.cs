@@ -7,7 +7,7 @@ using Zenject;
 [RequireComponent(typeof(Marching))]
 public class EnemyView : MonoBehaviour
 {
-    public List<ParticleSystem> onHitSystems;
+    public List<ParticleSystem> onDestroySystems;
 
     [Inject] readonly EnemySpawnSettings _settings;
     [Inject] readonly SignalBus _signalBus;
@@ -17,6 +17,8 @@ public class EnemyView : MonoBehaviour
     
     public Animator animator { get; private set; }
     private Marching _marching;
+    private Renderer _renderer;
+    private Collider _collider;
     private float hp;
     private bool _idle;
     private List<Collider> _trackedColliders;
@@ -30,7 +32,9 @@ public class EnemyView : MonoBehaviour
         }
         
         hp = _settings.HP;
+        _renderer = GetComponentInChildren<Renderer>();
         _marching = GetComponentInChildren<Marching>();
+        _collider = GetComponent<Collider>();
         animator = GetComponentInChildren<Animator>();
         _idle = false;
         _trackedColliders = new List<Collider>();
@@ -39,6 +43,13 @@ public class EnemyView : MonoBehaviour
         float z = (Random.value * 2f) - 1f;
         Vector3 startPos = new Vector3(x, 0, z);
         startPos = startPos.normalized * spawnOffset;
+        if (Mathf.Floor(startPos.x) == 0) {
+            startPos.x = 1;
+        }
+        if (Mathf.Floor(startPos.z) == 0) {
+            startPos.z = 1;
+        }
+
         transform.position = startPos;
         transform.LookAt(Vector3.zero);
 
@@ -46,8 +57,10 @@ public class EnemyView : MonoBehaviour
     }
 
     void LateUpdate () {
-        float speed = _marching.MoveSpeed * _settings.MoveSpeed;
-        transform.position += transform.forward * (speed * Time.deltaTime);
+        if (hp > 0) {
+            float speed = _marching.MoveSpeed * _settings.MoveSpeed;
+            transform.position += transform.forward * (speed * Time.deltaTime);
+        }
     }
 
     void OnTriggerEnter (Collider other) {
@@ -87,14 +100,19 @@ public class EnemyView : MonoBehaviour
 
     public void ProcessHit (RaycastHit hit) {
         float maxDelay = 0;
-        for (int i = 0; i < onHitSystems.Count; i++) {
-            Instantiate(onHitSystems[i], hit.point, onHitSystems[i].transform.rotation);
-            maxDelay = Mathf.Max(onHitSystems[i].main.duration, maxDelay);
-        }
 
         hp--;
-        if (hp <= 0) {
+        if (hp == 0) {
+            for (int i = 0; i < onDestroySystems.Count; i++) {
+                Instantiate(onDestroySystems[i], hit.point, transform.rotation * onDestroySystems[i].transform.rotation, transform);
+                float dur = onDestroySystems[i].main.startLifetime.constantMax + onDestroySystems[i].main.duration;
+                maxDelay = Mathf.Max(dur, maxDelay);
+            }
+
+            _renderer.enabled = false;
+            _collider.enabled = false;
             Destroy(gameObject, maxDelay);
+
             _signalBus.Fire(new AddScoreSignal() {
                 val = _settings.score
             });

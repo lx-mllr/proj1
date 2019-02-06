@@ -171,7 +171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7405b420de755748884b2e8e14067c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onHitSystems: []
+  onDestroySystems:
+  - {fileID: 2409124390150598240, guid: 23af0c1435e7db349b7faffc59796d68, type: 3}
+  - {fileID: 1831939155645497450, guid: 81fcd9d66284c794fbd3cce16943fc89, type: 3}
 --- !u!65 &6721363682341846783
 BoxCollider:
   m_ObjectHideFlags: 0

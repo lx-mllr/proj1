@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: particle
-  m_Shader: {fileID: 4800000, guid: 89c173293c3c79d46a0e3b16c59f83a4, type: 3}
+  m_Name: particle-lit
+  m_Shader: {fileID: 4800000, guid: 3e8efa0ab219361409f1c05baa93cc3c, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -61,8 +61,6 @@ Material:
     - _CameraFadingEnabled: 0
     - _CameraFarFadeDistance: 2
     - _CameraNearFadeDistance: 1
-    - _ColorMask: 15
-    - _ColorMode: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -74,9 +72,9 @@ Material:
     - _EmissionEnabled: 0
     - _FlipbookMode: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0
     - _GlossyReflections: 1
-    - _LightingEnabled: 0
+    - _LightingEnabled: 1
     - _Metallic: 0
     - _Mode: 3
     - _OcclusionStrength: 1
@@ -87,17 +85,11 @@ Material:
     - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
     - _UVSec: 0
-    - _UseUIAlphaClip: 0
     - _ZWrite: 0
     m_Colors:
+    - _AlphaRangeXY: {r: 0, g: 0, b: 0.2, a: 0.8}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 3.8499708, g: 4.1763396, b: 1.9896711, a: 0.69803923}
-    - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.76024896, g: 0.61641806, b: 3.9245284, a: 0.63529414}
+    - _EmissionColor: {r: 1.0980393, g: 0.45490196, b: 0.45490196, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
