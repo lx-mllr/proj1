@@ -7,21 +7,29 @@ using Zenject;
 [RequireComponent(typeof(Marching))]
 public class EnemyView : MonoBehaviour
 {
-    public List<ParticleSystem> onDestroySystems;
-
-    [Inject] readonly EnemySpawnSettings _settings;
-    [Inject] readonly SignalBus _signalBus;
-    
     public static float spawnDistance = 0.6f;
     private static float spawnOffset = 0f;
     
+    public List<ParticleSystem> onDestroySystems;
+
     public Animator animator { get; private set; }
     private Marching _marching;
     private Renderer _renderer;
     private Collider _collider;
-    private float hp;
+    private int hp;
     private bool _idle;
     private List<Collider> _trackedColliders;
+
+    EnemySpawnSettings _settings;
+    SignalBus _signalBus;
+    float _hpStartRatio;
+
+    [Inject] 
+    public void Construct (float ratio, EnemySpawnSettings settings, SignalBus signalBus) {
+        _settings = settings;
+        _signalBus = signalBus;
+        _hpStartRatio = ratio;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +39,15 @@ public class EnemyView : MonoBehaviour
             spawnOffset = (_ground.bounds.extents.magnitude * spawnDistance);
         }
         
-        hp = _settings.HP;
+        _hpStartRatio = Mathf.Max(0.1f, _hpStartRatio);
+        hp = (int)Mathf.Ceil(_settings.HP * _hpStartRatio);
+        _idle = false;
+
         _renderer = GetComponentInChildren<Renderer>();
         _marching = GetComponentInChildren<Marching>();
         _collider = GetComponent<Collider>();
         animator = GetComponentInChildren<Animator>();
-        _idle = false;
+        
         _trackedColliders = new List<Collider>();
 
         float x = (Random.value * 2f) - 1f;
@@ -61,6 +72,8 @@ public class EnemyView : MonoBehaviour
             float speed = _marching.MoveSpeed * _settings.MoveSpeed;
             transform.position += transform.forward * (speed * Time.deltaTime);
         }
+
+        _renderer.material.SetFloat("_HPRatio", (hp / (float)_settings.HP));
     }
 
     void OnTriggerEnter (Collider other) {
@@ -125,7 +138,7 @@ public class EnemyView : MonoBehaviour
         });
     }
 
-    public class Factory : PlaceholderFactory<EnemyView> {
+    public class Factory : PlaceholderFactory<float, EnemyView> {
         [Inject] public EnemySpawnInstaller spawnParent;
     }
 }

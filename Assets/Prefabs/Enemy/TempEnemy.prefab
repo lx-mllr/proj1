@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 694184569403312809}
   - component: {fileID: 694184569403312808}
   - component: {fileID: 5020965200696291920}
+  - component: {fileID: 5867948286794155679}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ef0fd105e5f4ce144917c59a77a60606, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,6 +126,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486c69818dffcd14f96ce64502516bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5867948286794155679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694184569403312790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19481a315a4f04c1698999553ff2b425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 0.09762803, g: 0.08235295, b: 0.9254902, a: 1}
+    key2: {r: 0.9245283, g: 0.082858644, b: 0.082858644, a: 0}
+    key3: {r: 0.103773594, g: 0.1013261, b: 0.1013261, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 16384
+    ctime1: 32768
+    ctime2: 49151
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  wrapMode: 1
+  filterMode: 1
+  anisoLevel: 1
+  resolution: 128
+  propertyName: _MainTex
+  useSharedMaterial: 0
+  globalName: 
 --- !u!1 &694184570450845072
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,7 +53,8 @@ public class GamePlayManager : ITickable, IInitializable {
         _lastSpawn += Time.deltaTime;
 
         if (_lastSpawn > _spawnRate) {
-            EnemyView e = _enemyFactory.Create();
+            float hpSpawnRatio = Mathf.Repeat(_score / (float)_settings.RespawnSettingsRebindThreshold, 1.0f);
+            EnemyView e = _enemyFactory.Create(hpSpawnRatio);
             e.transform.parent = _enemyFactory.spawnParent.transform;
             _lastSpawn = 0f;
         }

@@ -17,7 +17,7 @@ public class EnemySpawnInstaller : MonoInstaller
         Container.BindSignal<EndGameSignal>().ToMethod(DestroyAll);
         RebindSettings();
 
-        Container.BindFactory<EnemyView, EnemyView.Factory>().FromComponentInNewPrefab(enemyPrefab);
+        Container.BindFactory<float, EnemyView, EnemyView.Factory>().FromComponentInNewPrefab(enemyPrefab);
     }
 
     private void RebindSettings() {
