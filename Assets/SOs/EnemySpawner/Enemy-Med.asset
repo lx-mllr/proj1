@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733b63302a685544a9069783e6092af9, type: 3}
   m_Name: Enemy-Med
   m_EditorClassIdentifier: 
-  HP: 5
+  HP: 15
   score: 3
   MoveSpeed: 1
   AttackStr: 3

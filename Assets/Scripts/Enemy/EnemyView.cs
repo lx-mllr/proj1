@@ -10,6 +10,7 @@ public class EnemyView : MonoBehaviour
     public static float spawnDistance = 0.6f;
     private static float spawnOffset = 0f;
     
+    public List<ParticleSystem> onAttackSystems;
     public List<ParticleSystem> onDestroySystems;
 
     public Animator animator { get; private set; }
@@ -111,6 +112,12 @@ public class EnemyView : MonoBehaviour
         animator.SetBool("Idle", _idle);
     }
 
+    private void PlayAttackParticles () {
+        for (int i = 0; i < onAttackSystems.Count; i++) {
+            Instantiate(onAttackSystems[i], transform.position, transform.rotation * onAttackSystems[i].transform.rotation, transform);
+        }
+    }
+
     public void ProcessHit (RaycastHit hit) {
         float maxDelay = 0;
 
@@ -133,6 +140,7 @@ public class EnemyView : MonoBehaviour
     }
 
     public void DispatchAttack () {
+        PlayAttackParticles();
         _signalBus.Fire(new AttackSignal () {
                 damage = _settings.AttackStr
         });
