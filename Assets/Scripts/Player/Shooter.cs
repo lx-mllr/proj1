@@ -44,7 +44,7 @@ public class Shooter : MonoBehaviour
                 direction = transform.rotation * direction;
                 Vector3 rayEnd = transform.position + direction;
                 
-                LayerMask layerMask = LayerUtil.GetLayerMaskFromPos(transform.rotation * _dir);
+                int layerMask = LayerUtil.GetLayerMaskFromPos(transform.rotation * _dir);
 
                 if (Physics.Raycast(transform.position, direction, out RaycastHit hit, shootStr, layerMask)) {
                     if (hit.collider) {

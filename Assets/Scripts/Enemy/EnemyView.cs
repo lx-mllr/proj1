@@ -65,6 +65,8 @@ public class EnemyView : MonoBehaviour
         transform.position = startPos;
         transform.LookAt(Vector3.zero);
 
+        int layer = LayerUtil.GetLayerFromPos(transform.position);
+        Debug.Log(layer);
         gameObject.layer = LayerUtil.GetLayerFromPos(transform.position);
     }
 
