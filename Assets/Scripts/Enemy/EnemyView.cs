@@ -133,6 +133,7 @@ public class EnemyView : MonoBehaviour
 
             _renderer.enabled = false;
             _collider.enabled = false;
+            animator.enabled = false;
             Destroy(gameObject, maxDelay);
 
             _signalBus.Fire(new AddScoreSignal() {

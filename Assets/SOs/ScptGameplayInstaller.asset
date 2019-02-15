@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     BaseHealth: 50
-    RespawnSettingsRebindThreshold: 50
-    EnemySpawnRate: 1.75
+    RespawnSettingsRebindThreshold: 100
+    EnemySpawnRate: 4

@@ -9,6 +9,8 @@ public class BaseView : MonoBehaviour, IHeroMono
     [Inject] readonly SignalBus _signalBus;
 
     public float HP;
+    public float UI_Update_Speed = 0.9f;
+    public Renderer HealthRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,9 @@ public class BaseView : MonoBehaviour, IHeroMono
     // Update is called once per frame
     void Update()
     {
-        // update ui
+        float old = HealthRenderer.material.GetFloat("_FillPct");
+        float updated = Mathf.Lerp(old, HP / _settings.BaseHealth, UI_Update_Speed);
+        HealthRenderer.material.SetFloat("_FillPct", updated);
 
         if (HP <= 0) {
             TriggerEndGame();
@@ -34,6 +38,7 @@ public class BaseView : MonoBehaviour, IHeroMono
 
     public void TriggerEndGame () {
         enabled = false;
+        HealthRenderer.material.SetFloat("_FillPct", 0);
         _signalBus.Fire<EndGameSignal>();
         _signalBus.Unsubscribe<AttackSignal>(OnAttackSignal);
     }
